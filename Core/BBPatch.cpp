@@ -5,6 +5,10 @@
 
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include <iterator>
+
+#include "string_utility.h"
 
 #pragma mark Static Public Methods
 
@@ -14,8 +18,7 @@ const BB::Patch::name_value_pair    BB::Patch::NameValuePairEnd    = {"",NULL};
 
 BB::Patch* BB::Patch::CreateFromSource(BB::Context& context,
 									   const name_value_pair  input_defaults[],
-									   const name_source_pair output_sources[],
-									   const std::string& update_source)
+									   const name_source_pair output_sources[])
 {
 	std::vector<name_function_pair> outputs;
 	const name_source_pair * source;
@@ -34,11 +37,9 @@ BB::Patch* BB::Patch::CreateFromSource(BB::Context& context,
 	}
 	outputs.push_back(BB::Patch::NameFunctionPairEnd);
 
-	update_function = context.createFunction(update_source);
 	return new BB::Patch(context, 
 						 input_defaults,
-						 &outputs[0],
-						 update_function);
+						 &outputs[0]);
 }
 
 #pragma mark Public Methods
@@ -107,44 +108,18 @@ JSValueRef BB::Patch::getOutput(const std::string& name) const throw(BB::Excepti
 	return value;
 }
 
-JSValueRef BB::Patch::update() const
-{
-	JSValueRef except, ret;
-	std::vector<JSValueRef> call_arguments;
-
-	if (this->m_update_function != NULL)
-	{
-		except  = NULL;
-		ret     = JSObjectCallAsFunction(this->m_context.context(),
-										 this->m_update_function, this->m_patch_object,
-										 call_arguments.size(), &call_arguments[0],
-										 &except);
-		if (except != NULL)
-			this->m_context.throwException(except);
-	}
-	else
-	{
-		ret = JSValueMakeUndefined(this->m_context.context());
-	}
-
-	return ret;
-}
-
 #pragma mark Construction and Destruction
 
 BB::Patch::Patch(BB::Context& context,
 				 const name_value_pair    input_defaults[],
-				 const name_function_pair output_functions[],
-				 JSObjectRef update_function)
- :	m_context(context),
-	m_create_function(NULL)
+				 const name_function_pair output_functions[])
+ :	m_context(context)
 {
 	const name_value_pair*    input;
 	const name_function_pair* output;
 	JSContextRef ctx;
 
 	ctx = context.context();
-	this->m_update_function = update_function;	
 	this->m_patch_object = JSObjectMake(ctx, context.patchClass(), this);
 
 	if (input_defaults != NULL)
@@ -164,6 +139,7 @@ BB::Patch::Patch(BB::Context& context,
 
 //	JSValueProtect(ctx, this->m_patch_object);
 }
+
 BB::Patch::~Patch()
 {
 	this->disconnectAll();
@@ -341,40 +317,25 @@ JSObjectRef BB::Patch::Constructor(JSContextRef ctx,
 {
 	BB::Context * context;
 	BB::Patch * patch;
-	JSObjectRef update_function;
-	JSValueRef except;
 	
 	context = BB::Context::FromJS(ctx);
-	if (argumentCount == 0)
+	if (argumentCount != 0)
 	{
-		update_function = NULL;
-	}
-	else if (argumentCount == 1)
-	{
-		except   = NULL;
-		update_function = JSValueToObject(ctx, arguments[2], &except);
-		if (except != NULL)
-			context->throwException(except);
-		if (!JSObjectIsFunction(ctx, update_function))
-			context->throwException("Create's third argument must be a function");
-	}
-	else
-	{
-		context->throwException("Create takes at most one 1 argument!");
+		context->throwException("Constructor takes no arguments!");
 	}
 	
-	patch = new BB::Patch(*context, NULL, NULL, update_function);
+	patch = new BB::Patch(*context, NULL, NULL);
 	
 	return patch->m_patch_object;
 }
 
 #pragma mark Input and Outputs
 JSValueRef BB::Patch::AddInput(JSContextRef ctx,
-							 JSObjectRef function,
-							 JSObjectRef thisObject,
-							 size_t argumentCount,
-							 const JSValueRef arguments[],
-							 JSValueRef* exception) throw(BB::Exception)
+							   JSObjectRef function,
+							   JSObjectRef thisObject,
+							   size_t argumentCount,
+							   const JSValueRef arguments[],
+							   JSValueRef* exception) throw(BB::Exception)
 {
 	BB::Context * context;
 	BB::Patch * patch;
@@ -383,7 +344,7 @@ JSValueRef BB::Patch::AddInput(JSContextRef ctx,
 		context->throwException("AddInput only takes two arguments!");
 	patch = BB::Patch::FromJS(ctx, thisObject);
 	patch->addInput(patch->m_context.getString(arguments[0]), arguments[1]);
-	return patch->update();
+	return JSValueMakeUndefined(ctx);
 }
 
 JSValueRef BB::Patch::AddOutput(JSContextRef ctx,
@@ -411,7 +372,7 @@ JSValueRef BB::Patch::AddOutput(JSContextRef ctx,
 		context->throwException("AddOutput's second argument must be a function");
 
 	patch->addOutput(patch->m_context.getString(arguments[0]), output_function);
-	return patch->update();
+	return JSValueMakeUndefined(ctx);
 }
 
 JSValueRef BB::Patch::RemoveInput(JSContextRef ctx,
@@ -428,7 +389,7 @@ JSValueRef BB::Patch::RemoveInput(JSContextRef ctx,
 		context->throwException("RemoveInput only takes one argument!");
 	patch = BB::Patch::FromJS(ctx, thisObject);
 	patch->removeInput(patch->m_context.getString(arguments[0]));
-	return patch->update();
+	return JSValueMakeUndefined(ctx);
 }
 
 JSValueRef BB::Patch::RemoveOutput(JSContextRef ctx,
@@ -445,7 +406,7 @@ JSValueRef BB::Patch::RemoveOutput(JSContextRef ctx,
 		context->throwException("RemoveOutput only takes one argument!");
 	patch = BB::Patch::FromJS(ctx, thisObject);
 	patch->removeOutput(patch->m_context.getString(arguments[0]));
-	return patch->update();
+	return JSValueMakeUndefined(ctx);
 }
 
 JSValueRef BB::Patch::GetInput(JSContextRef ctx,
@@ -555,7 +516,7 @@ JSValueRef BB::Patch::DisconnectOutput(JSContextRef ctx,
 	BB::Context * context;
 	BB::Patch * patch;
 	std::string name;
-	
+
 	context = BB::Context::FromJS(ctx);
 	if (argumentCount != 1)
 		context->throwException("DisconnectOutput takes only one argument!");
@@ -567,27 +528,9 @@ JSValueRef BB::Patch::DisconnectOutput(JSContextRef ctx,
 	return JSValueMakeUndefined(ctx);
 }
 
-#pragma mark Update
-JSValueRef BB::Patch::Update(JSContextRef ctx,
-							 JSObjectRef function,
-							 JSObjectRef thisObject,
-							 size_t argumentCount,
-							 const JSValueRef arguments[],
-							 JSValueRef* exception) throw(BB::Exception)
-{
-	BB::Context * context;
-	BB::Patch * patch;
-	
-	context = BB::Context::FromJS(ctx);
-	if (argumentCount != 0)
-		context->throwException("Update takes only one argument!");
-	
-	patch = BB::Patch::FromJS(ctx, thisObject);
-	
-	return patch->update();
-}
-
+#pragma mark -
 #pragma mark Utility
+#pragma mark -
 
 BB::Patch* BB::Patch::FromJS(JSContextRef ctx,
 							 JSObjectRef object)
@@ -609,7 +552,9 @@ BB::Patch* BB::Patch::FromJS(JSContextRef ctx,
 	return patch;
 }
 
+#pragma mark -
 #pragma mark Static Properties
+#pragma mark -
 
 const JSStaticValue BB::Patch::StaticValues[] =
 {
@@ -618,9 +563,6 @@ const JSStaticValue BB::Patch::StaticValues[] =
 
 const JSStaticFunction BB::Patch::StaticFunctions[] =
 {
-//	{"Create", BB::Patch::Create, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
-	{"update", BB::Patch::Update, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
-
 	{"addInput",  BB::Patch::AddInput,  kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
 	{"addOutput", BB::Patch::AddOutput, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
 	{"removeInput",  BB::Patch::RemoveInput,  kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
@@ -648,6 +590,230 @@ const JSClassDefinition BB::Patch::Definition =
 };
 
 #pragma mark -
+#pragma mark Serialise
+#pragma mark -
+
+/*
+ <patch id="0">
+	 <input name="forks" default="6" />
+	 <input name="woo" default="2">
+		 <connect patch="3" link="test" />
+	 </input>
+	 <output name="forks">
+		 <![CDATA[
+			 return 12;
+		 ]]>
+	 </output>
+ </patch>
+ */
+
+xmlNodePtr BB::Patch::serialize(const std::map<const BB::Patch*,size_t>& ids) const
+{
+	std::map<const BB::Patch*,size_t>::const_iterator patch_iter;
+	xmlNodePtr patch, curr;
+	char buffer[256];
+
+	patch_iter = ids.find((BB::Patch*)this);
+	if (patch_iter == ids.end())
+		return NULL;
+	
+	patch = xmlNewNode(NULL, BAD_CAST "patch");
+	sprintf(buffer, "%ld", patch_iter->second);
+	xmlNewProp(patch, BAD_CAST "id", BAD_CAST buffer);
+
+	for (std::map<std::string, JSValueRef>::const_iterator
+		 i = this->m_inputs.begin(),
+		 e = this->m_inputs.end();
+		 i != e; ++i)
+	{
+		curr = xmlNewNode(NULL, BAD_CAST "input");
+		xmlNewProp(curr, BAD_CAST "name", BAD_CAST i->first.c_str());
+		xmlNewProp(curr, BAD_CAST "default", BAD_CAST this->m_context.getString(i->second).c_str());
+
+		std::map<std::string, std::pair<BB::Patch*, std::string> >::const_iterator connect;
+		
+		connect = this->m_input_connections.find(i->first);
+		if (connect != this->m_input_connections.end() &&
+			((patch_iter = ids.find(connect->second.first)) != ids.end()))
+		{
+			xmlNodePtr conn;
+			
+			conn = xmlNewNode(NULL, BAD_CAST "connect");
+			sprintf(buffer, "%ld", patch_iter->second);
+			xmlNewProp(conn, BAD_CAST "patch", BAD_CAST buffer);
+			xmlNewProp(conn, BAD_CAST "link", BAD_CAST connect->second.second.c_str());
+			xmlAddChild(curr, conn);
+		}
+		xmlAddChild(patch, curr);
+	}
+	
+	for (std::map<std::string, JSObjectRef>::const_iterator
+		 i = this->m_outputs.begin(),
+		 e = this->m_outputs.end();
+		 i != e; ++i)
+	{
+		curr = xmlNewNode(NULL, BAD_CAST "output");
+		xmlNewProp(curr, BAD_CAST "name", BAD_CAST i->first.c_str());
+
+		if (JSObjectIsFunction(this->m_context.context(), i->second))
+		{
+			std::string funcstr = this->m_context.getString(i->second);
+			size_t start = funcstr.find('{');
+			size_t end   = funcstr.rfind('}');
+			
+			if (start != -1 && end != -1 && funcstr.find("return") != -1)
+			{
+				std::string function_body;
+				xmlNodePtr function;
+
+				function_body = string_utility::trim(funcstr.substr(start+1, end - start - 1));
+				function = xmlNewText(BAD_CAST function_body.c_str());
+				xmlAddChild(curr, function);
+			}
+		}
+		xmlAddChild(patch, curr);
+	}
+	
+	return patch;
+}
+
+size_t BB::Patch::deserializePatch(xmlNodePtr patch)
+{
+	xmlNodePtr node;
+	xmlChar* attr;
+	size_t id;
+
+	attr = xmlGetProp(patch, BAD_CAST "id");
+	if (attr == NULL)
+		this->m_context.throwException("patch does not have an id!");
+	id = atoi((char*)attr);
+	xmlFree(attr);
+
+	for (node = patch->children; node != NULL; node = node->next)
+	{
+		if (node->type == XML_ELEMENT_NODE)
+		{
+			std::string node_name = (const char *) node->name;
+			if (node_name == "input")
+			{
+				JSValueRef value;
+				std::string name;
+				
+				attr  = xmlGetProp(node, BAD_CAST "name");
+				if (attr == NULL)
+					this->m_context.throwException("input does not have a name!");
+				name  = (char*) attr;
+				xmlFree(attr);
+
+				attr  = xmlGetProp(node, BAD_CAST "default");
+				if (attr == NULL)
+					this->m_context.throwException("input does not have a default value!");
+				value = this->m_context.evaluateScript((char*)attr);
+				xmlFree(attr);
+
+				this->addInput(name, value);
+			}
+			else if (node_name == "output")
+			{
+				JSObjectRef function;
+				std::string function_body;
+				std::string name;
+
+				attr  = xmlGetProp(node, BAD_CAST "name");
+				if (attr == NULL)
+					this->m_context.throwException("output does not have a name!");
+				name  = (char*) attr;
+				xmlFree(attr);
+				
+				attr  = xmlNodeGetContent(node);
+				if (attr == NULL)
+					this->m_context.throwException("output does not have code!");
+				function_body = string_utility::trim((char*)attr);
+				function      = this->m_context.createFunction(function_body);
+				xmlFree(attr);
+
+				this->addOutput(name, function);
+			}
+			else
+			{
+				this->m_context.throwException("Unexpected node found '" + node_name + 
+													"' while parsing patch");
+			}
+		}
+	}
+
+	return id;
+}
+void BB::Patch::DeserializeConnections(BB::Context& context,
+									   xmlNodePtr patch,
+									   const std::map<size_t,BB::Patch*>& ids)
+{
+	std::map<size_t,BB::Patch*>::const_iterator link_from, link_to;
+	
+	xmlNodePtr node, subnode;
+	xmlChar* attr;
+	size_t id;
+	
+	attr = xmlGetProp(patch, BAD_CAST "id");
+	if (attr == NULL)
+		context.throwException("patch does not have an id!");
+	id = atoi((char*)attr);
+	xmlFree(attr);
+	
+	link_to = ids.find(id);
+	if (link_to == ids.end())
+		context.throwException("patch id is not mapped!?");
+
+	for (node = patch->children; node != NULL; node = node->next)
+	{
+		if (node->type != XML_ELEMENT_NODE)
+			continue;
+
+		std::string node_name = (const char *) node->name;
+		if (node_name != "input")
+			continue;
+
+		std::string to_name;
+		attr  = xmlGetProp(node, BAD_CAST "name");
+		if (attr == NULL)
+			context.throwException("input does not have a name!");
+		to_name  = (char*) attr;
+		xmlFree(attr);
+
+		for (subnode = node->children; subnode != NULL; subnode = subnode->next)
+		{
+			if (subnode->type != XML_ELEMENT_NODE)
+				continue;
+			
+			std::string subnode_name = (const char *) subnode->name;
+			if (subnode_name != "connect")
+				continue;
+			
+			size_t subnode_id;
+			std::string from_name;
+			
+			attr = xmlGetProp(subnode, BAD_CAST "patch");
+			if (attr == NULL)
+				context.throwException("connection does not have a patch!");
+			subnode_id = atoi((char*)attr);
+			xmlFree(attr);
+
+			attr = xmlGetProp(subnode, BAD_CAST "link");
+			if (attr == NULL)
+				context.throwException("connection does not have a link!");
+			from_name = (char*)attr;
+			xmlFree(attr);
+			
+			link_from = ids.find(subnode_id);
+			if (link_from == ids.end())
+				continue;
+			
+			(link_to->second)->connect(to_name, link_from->second, from_name);
+		}
+	}
+}
+
+#pragma mark -
 #pragma mark Patch C Interface
 #pragma mark -
 
@@ -661,7 +827,7 @@ bb_patch bbPatchCreate(bb_context ctx)
 	try
 	{
 		context = reinterpret_cast<BB::Context*>(ctx);
-		patch   = BB::Patch::CreateFromSource(*context, NULL, NULL, NULL);
+		patch   = BB::Patch::CreateFromSource(*context, NULL, NULL);
 		
 		JSValueProtect(context->context(), patch->object());
 	}
@@ -687,7 +853,7 @@ void bbPatchDestroy(bb_patch ptch)
 		context = patch->context();
 		ctx     = context->context();
 		object  = patch->object();
-		
+
 		JSValueUnprotect(ctx, object);
 		JSGarbageCollect(ctx);
 	}
@@ -695,23 +861,6 @@ void bbPatchDestroy(bb_patch ptch)
 	{
 		std::cerr << error.what() << std::endl;
 	}		
-}
-
-#pragma mark Update
-
-void bbPatchUpdate(bb_patch ptch)
-{
-	BB::Patch* patch;
-	
-	try
-	{
-		patch = reinterpret_cast<BB::Patch*>(ptch);
-		patch->update();
-	}
-	catch (BB::Exception& error)
-	{
-		std::cerr << error.what() << std::endl;
-	}	
 }
 
 #pragma mark Add and Remove Inputs and Outputs
@@ -849,7 +998,7 @@ void bbPatchDisconnectOutput(bb_patch ptch, const char * name)
 
 #pragma mark Get Input and Output
 
-const char * bbPatchGetInputAsString(bb_patch ptch, const char * name)
+char * bbPatchGetInputAsString(bb_patch ptch, const char * name)
 {
 	BB::Patch* patch;
 	
@@ -897,7 +1046,7 @@ double bbPatchGetInputAsNumber(bb_patch ptch, const char * name)
 	return NULL;
 }
 
-const char * bbPatchGetOutputAsString(bb_patch ptch, const char * name)
+char * bbPatchGetOutputAsString(bb_patch ptch, const char * name)
 {
 	BB::Patch* patch;
 	

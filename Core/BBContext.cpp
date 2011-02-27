@@ -1,4 +1,5 @@
 #include "BBContext.h"
+#include "BBPatchCollection.h"
 #include "BBPatch.h"
 #include "BBCore.h"
 
@@ -9,7 +10,8 @@
 
 BB::Context::Context()
  :	m_class_context(NULL),
-	m_class_patch(NULL)
+	m_class_patch(NULL),
+	m_class_patch_collection(NULL)
 {
 	JSObjectRef object;
 	
@@ -20,6 +22,7 @@ BB::Context::Context()
 	JSObjectSetPrivate(object, this);
 
 	this->patchClass();
+	this->patchCollectionClass();
 }
 
 BB::Context::~Context()
@@ -28,7 +31,9 @@ BB::Context::~Context()
 		JSClassRelease(this->m_class_context);
 	if (this->m_class_patch != NULL)
 		JSClassRelease(this->m_class_patch);
-	
+	if (this->m_class_patch_collection != NULL)
+		JSClassRelease(this->m_class_patch_collection);
+
 	JSGlobalContextRelease(this->m_context);
 }
 
@@ -99,6 +104,30 @@ JSClassRef BB::Context::patchClass()
 	return this->m_class_patch;
 }
 
+JSClassRef BB::Context::patchCollectionClass()
+{
+	if (this->m_class_patch_collection == NULL)
+	{
+		JSObjectRef constructor, global;
+		JSStringRef constructor_string;
+		
+		this->m_class_patch_collection = JSClassCreate(&BB::PatchCollection::Definition);
+		
+		constructor_string = JSStringCreateWithUTF8CString("PatchCollection");
+		constructor = JSObjectMakeConstructor(this->m_context, NULL,
+											  BB::PatchCollection::Constructor);
+		global  = JSContextGetGlobalObject(this->m_context);
+		JSObjectSetProperty(this->m_context, global,
+							constructor_string, constructor,
+							kJSPropertyAttributeReadOnly |
+							kJSPropertyAttributeDontEnum |
+							kJSPropertyAttributeDontDelete,
+							NULL);
+		JSStringRelease(constructor_string);		
+	}
+	return this->m_class_patch_collection;
+}
+
 #pragma mark -
 #pragma mark Evaluate Scripts
 
@@ -125,6 +154,9 @@ JSValueRef BB::Context::evaluateScriptFromFile(const std::string& filename) cons
 
 	std::ifstream file(filename.c_str());
 	std::vector<char> buffer;
+	JSStringRef script;
+	JSObjectRef function;
+	JSValueRef except, value;
 
 	if (!file.good())
 		return NULL;
@@ -138,7 +170,24 @@ JSValueRef BB::Context::evaluateScriptFromFile(const std::string& filename) cons
 	
 	buffer.push_back('\0');
 
-	return this->evaluateScript(&buffer[0]);
+	except = NULL;
+	script = JSStringCreateWithUTF8CString(&buffer[0]);
+	function = JSObjectMakeFunction(this->m_context, NULL, 0, NULL, script,
+									NULL, 1, &except);
+	JSStringRelease(script);
+	if (except != NULL)
+		this->throwException(except);
+	
+	except = NULL;
+	value = JSObjectCallAsFunction(this->m_context, function, NULL, 0, NULL, &except);
+	if (except != NULL)
+		this->throwException(except);
+
+	JSValueProtect(this->m_context, value);
+	JSGarbageCollect(this->m_context);
+	JSValueUnprotect(this->m_context, value);
+	
+	return value;
 }
 
 #pragma mark -
@@ -212,11 +261,8 @@ void BB::Context::Initialize(JSContextRef ctx, JSObjectRef object)
 void BB::Context::Finalize(JSObjectRef object)
 {
 //	BB::Context * context;
-//
 //	context = static_cast<BB::Context*>(JSObjectGetPrivate(object));
-//	printf("BB::Context delete : start!\n");
-//	delete context;
-//	printf("BB::Context delete : end!\n");
+//	JSGarbageCollect(context->m_context);
 }
 
 JSObjectRef BB::Context::createFunction(const std::string& source) throw(BB::Exception)
@@ -243,11 +289,14 @@ JSValueRef BB::Context::Print(JSContextRef ctx,
 							  const JSValueRef arguments[],
 							  JSValueRef* exception)
 {
+	BB::Context * context;
 	JSStringRef string_js;
 	std::vector<char> buffer;
 	JSValueRef except;
 
-	assert(argumentCount == 1);
+	context = BB::Context::FromJS(ctx);
+	if (argumentCount != 1)
+		context->throwException("Print takes one argument!");	
 
 	except    = NULL;
 	string_js = JSValueToStringCopy(ctx, arguments[0], &except);
@@ -267,6 +316,24 @@ JSValueRef BB::Context::Print(JSContextRef ctx,
 	return JSValueMakeUndefined(ctx);
 }
 
+JSValueRef BB::Context::GarbageCollect(JSContextRef ctx,
+									   JSObjectRef function,
+									   JSObjectRef thisObject,
+									   size_t argumentCount,
+									   const JSValueRef arguments[],
+									   JSValueRef* exception)
+{
+	BB::Context * context;
+
+	context = BB::Context::FromJS(ctx);
+	if (argumentCount != 0)
+		context->throwException("GarbageCollect takes one argument!");	
+
+	JSGarbageCollect(ctx);
+
+	return JSValueMakeUndefined(ctx);
+}
+
 #pragma mark Static Properties
 
 const JSStaticValue BB::Context::StaticValues[] =
@@ -275,7 +342,8 @@ const JSStaticValue BB::Context::StaticValues[] =
 };
 const JSStaticFunction BB::Context::StaticFunctions[] =
 {
-	{"print", BB::Context::Print, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
+	{"Print",               BB::Context::Print,          kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
+	{"ForceGarbageCollect", BB::Context::GarbageCollect, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontEnum | kJSPropertyAttributeDontDelete},
 };
 
 const JSClassDefinition BB::Context::Definition =

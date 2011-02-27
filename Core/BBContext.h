@@ -15,7 +15,9 @@ namespace BB
 		~Context();
 
 		inline JSContextRef context() const {return this->m_context;}
+
 		JSClassRef patchClass();
+		JSClassRef patchCollectionClass();
 
 		JSValueRef evaluateScript(const std::string& string) const throw(BB::Exception);
 		JSValueRef evaluateScriptFromFile(const std::string& filename) const throw(BB::Exception);
@@ -43,12 +45,9 @@ namespace BB
 	protected:
 		static void Initialize(JSContextRef ctx, JSObjectRef object);
 		static void Finalize(JSObjectRef object);
-		static JSValueRef Print(JSContextRef ctx,
-								JSObjectRef function,
-								JSObjectRef thisObject,
-								size_t argumentCount,
-								const JSValueRef arguments[],
-								JSValueRef* exception);		
+
+		static JSValueRef Print(JSContextRef,JSObjectRef,JSObjectRef,size_t,const JSValueRef[],JSValueRef*);
+		static JSValueRef GarbageCollect(JSContextRef,JSObjectRef,JSObjectRef,size_t,const JSValueRef[],JSValueRef*);
 
 		static const JSClassDefinition Definition;
 		static const JSStaticValue     StaticValues[];
@@ -56,6 +55,7 @@ namespace BB
 
 	private:
 		JSClassRef m_class_context;
+		JSClassRef m_class_patch_collection;
 		JSClassRef m_class_patch;
 		JSGlobalContextRef m_context;
 	};

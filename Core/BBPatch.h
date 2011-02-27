@@ -5,11 +5,15 @@
 #include <string>
 #include <map>
 
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
 #include "BBException.h"
 
 namespace BB
 {
 	class Context;
+	class PatchCollection;
 
 	class Patch
 	{
@@ -39,12 +43,11 @@ namespace BB
 
 		static BB::Patch* CreateFromSource(BB::Context& context,
 										   const name_value_pair  input_defaults[],
-										   const name_source_pair output_sources[],
-										   const std::string& update_source);
+										   const name_source_pair output_sources[]);
 		
 		void addInput(const std::string& name, JSValueRef value);
 		void addOutput(const std::string& name, JSObjectRef function);
-		
+
 		void removeInput(const std::string& name);
 		void removeOutput(const std::string& name);
 
@@ -61,15 +64,14 @@ namespace BB
 		void disconnectOutput(const std::string& output) throw(BB::Exception);
 		void disconnectAll() throw(BB::Exception);
 
-		JSValueRef update() const;
-
 		static BB::Patch* FromJS(JSContextRef ctx,
 								 JSObjectRef object);
 	protected:
+		friend class PatchCollection;
+
 		Patch(BB::Context& context,
 			  const name_value_pair    input_defaults[],
-			  const name_function_pair output_functions[],
-			  JSObjectRef update_function);
+			  const name_function_pair output_functions[]);
 		virtual ~Patch();
 
 		JSValueRef evaluateScript(const std::string& string) const throw(BB::Exception);
@@ -87,8 +89,6 @@ namespace BB
 		static JSValueRef RemoveInput(JSContextRef,JSObjectRef,JSObjectRef,size_t,const JSValueRef[],JSValueRef*) throw(BB::Exception);
 		static JSValueRef RemoveOutput(JSContextRef,JSObjectRef,JSObjectRef,size_t,const JSValueRef[],JSValueRef*) throw(BB::Exception);
 
-		static JSValueRef Update(JSContextRef,JSObjectRef,JSObjectRef,size_t,const JSValueRef[],JSValueRef*) throw(BB::Exception);
-
 		static JSValueRef GetInput(JSContextRef,JSObjectRef,JSObjectRef,size_t,const JSValueRef[],JSValueRef*) throw(BB::Exception);
 		static JSValueRef GetOutput(JSContextRef,JSObjectRef,JSObjectRef,size_t,const JSValueRef[],JSValueRef*) throw(BB::Exception);
 
@@ -100,17 +100,24 @@ namespace BB
 		static const JSStaticValue     StaticValues[];
 		static const JSStaticFunction  StaticFunctions[];
 
+	protected:		
+		xmlNodePtr serialize(const std::map<const BB::Patch*,size_t>& ids) const;
+
+		size_t deserializePatch(xmlNodePtr patch);
+		static void DeserializeConnections(BB::Context& context,
+										   xmlNodePtr patch,
+										   const std::map<size_t,BB::Patch*>& ids);
+		
 	private:
 		BB::Context& m_context;
 		JSObjectRef  m_patch_object;
-		JSObjectRef  m_update_function;
-		JSObjectRef  m_create_function;
 
 		std::map<std::string, std::pair<BB::Patch*, std::string> > m_input_connections;
 		std::multimap<std::string, std::pair<BB::Patch*, std::string> > m_output_connections;
 
 		std::map<std::string, JSValueRef>  m_inputs;
 		std::map<std::string, JSObjectRef> m_outputs;
+//		std::map<std::string, std::string> m_outputSource;
 	};
 };
 

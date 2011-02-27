@@ -10,6 +10,9 @@
 		493A003313164CEA00ECDD14 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493A002A13164CE300ECDD14 /* JavaScriptCore.framework */; };
 		493A003613164CF200ECDD14 /* JavaScriptCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 493A002A13164CE300ECDD14 /* JavaScriptCore.framework */; };
 		493A003913164CF500ECDD14 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493A002A13164CE300ECDD14 /* JavaScriptCore.framework */; };
+		493A023313176B0A00ECDD14 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 493A023213176B0A00ECDD14 /* libxml2.dylib */; };
+		493A023413176B0C00ECDD14 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 493A023213176B0A00ECDD14 /* libxml2.dylib */; };
+		493A0A411318E88600ECDD14 /* string_utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 493A0A1F1318E77E00ECDD14 /* string_utility.cpp */; };
 		493AFEDA1316451800ECDD14 /* BBPatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 493AE8FF1311CB2700ECDD14 /* BBPatch.cpp */; };
 		493AFEDB1316451800ECDD14 /* BBContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 493AE9AC1311DB9700ECDD14 /* BBContext.cpp */; };
 		493AFEDC1316451800ECDD14 /* BBPatchCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 493AFC2D1315012800ECDD14 /* BBPatchCollection.cpp */; };
@@ -93,6 +96,12 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		493A001D13164CE300ECDD14 /* JavaScriptCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JavaScriptCore.xcodeproj; path = JavaScriptCore/JavaScriptCore.xcodeproj; sourceTree = "<group>"; };
+		493A023213176B0A00ECDD14 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		493A08051318C16200ECDD14 /* test1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test1.xml; sourceTree = BUILT_PRODUCTS_DIR; };
+		493A08061318C16200ECDD14 /* test2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test2.xml; sourceTree = BUILT_PRODUCTS_DIR; };
+		493A086E1318CA6F00ECDD14 /* test3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = test3.xml; path = /tmp/Core/Debug/test3.xml; sourceTree = "<absolute>"; };
+		493A0A1E1318E77E00ECDD14 /* string_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_utility.h; sourceTree = "<group>"; };
+		493A0A1F1318E77E00ECDD14 /* string_utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string_utility.cpp; sourceTree = "<group>"; };
 		493AE8FE1311CB2700ECDD14 /* BBPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPatch.h; sourceTree = "<group>"; };
 		493AE8FF1311CB2700ECDD14 /* BBPatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BBPatch.cpp; sourceTree = "<group>"; };
 		493AE9031311CBA600ECDD14 /* BBCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCore.h; sourceTree = "<group>"; };
@@ -113,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493A023413176B0C00ECDD14 /* libxml2.dylib in Frameworks */,
 				493A003313164CEA00ECDD14 /* JavaScriptCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,6 +133,7 @@
 			files = (
 				493A003913164CF500ECDD14 /* JavaScriptCore.framework in Frameworks */,
 				493AFFF113164C7F00ECDD14 /* BBCore.framework in Frameworks */,
+				493A023313176B0A00ECDD14 /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +147,7 @@
 				493AFA3C13149E1500ECDD14 /* Resources */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				493A01D8131758F100ECDD14 /* Frameworks */,
 			);
 			name = "BrainBox Controller";
 			sourceTree = "<group>";
@@ -144,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				493AE9031311CBA600ECDD14 /* BBCore.h */,
+				493A0A1E1318E77E00ECDD14 /* string_utility.h */,
+				493A0A1F1318E77E00ECDD14 /* string_utility.cpp */,
 				493AFD6A1315D4B700ECDD14 /* BBException.h */,
 				493AFD6B1315D4B700ECDD14 /* BBException.cpp */,
 				493AE9AB1311DB9700ECDD14 /* BBContext.h */,
@@ -162,6 +176,9 @@
 			children = (
 				493AFED51316450B00ECDD14 /* BBCore.framework */,
 				493AFF051316466A00ECDD14 /* Test Core */,
+				493A08051318C16200ECDD14 /* test1.xml */,
+				493A08061318C16200ECDD14 /* test2.xml */,
+				493A086E1318CA6F00ECDD14 /* test3.xml */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,6 +192,14 @@
 				493A003013164CE300ECDD14 /* jsc */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		493A01D8131758F100ECDD14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				493A023213176B0A00ECDD14 /* libxml2.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		493AFA3C13149E1500ECDD14 /* Resources */ = {
@@ -319,6 +344,7 @@
 				493AFEDB1316451800ECDD14 /* BBContext.cpp in Sources */,
 				493AFEDC1316451800ECDD14 /* BBPatchCollection.cpp in Sources */,
 				493AFEDD1316451800ECDD14 /* BBException.cpp in Sources */,
+				493A0A411318E88600ECDD14 /* string_utility.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +415,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "BBCore-Info.plist";
 				INSTALL_PATH = ./;
 				OTHER_LDFLAGS = (
@@ -417,6 +444,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "BBCore-Info.plist";
 				INSTALL_PATH = ./;
 				OTHER_LDFLAGS = (
