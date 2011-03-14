@@ -3,6 +3,7 @@
 
 #include <JavaScriptCore/JavaScriptCore.h>
 #include <string>
+#include <vector>
 #include <map>
 
 #include <libxml/parser.h>
@@ -66,6 +67,13 @@ namespace BB
 
 		static BB::Patch* FromJS(JSContextRef ctx,
 								 JSObjectRef object);
+
+		inline size_t inputCount() const  {return this->m_inputs.size();}
+		inline size_t outputCount() const {return this->m_outputs.size();}
+		std::vector<const char*> inputs() const;
+		std::vector<const char*> outputs() const;
+		std::vector<std::pair<BB::Patch*,const char*> > inputConnections() const;
+
 	protected:
 		friend class PatchCollection;
 
@@ -117,7 +125,6 @@ namespace BB
 
 		std::map<std::string, JSValueRef>  m_inputs;
 		std::map<std::string, JSObjectRef> m_outputs;
-//		std::map<std::string, std::string> m_outputSource;
 	};
 };
 

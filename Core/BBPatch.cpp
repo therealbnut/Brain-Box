@@ -552,6 +552,59 @@ BB::Patch* BB::Patch::FromJS(JSContextRef ctx,
 	return patch;
 }
 
+std::vector<const char*> BB::Patch::inputs() const
+{
+	std::vector<const char*> names;
+
+	for (std::map<std::string, JSValueRef>::const_iterator
+		 i = this->m_inputs.begin(),
+		 e = this->m_inputs.end();
+		 i != e; ++i)
+	{
+		names.push_back(i->first.c_str());
+	}
+
+	return names;
+}
+std::vector<const char*> BB::Patch::outputs() const
+{
+	std::vector<const char*> names;
+	
+	for (std::map<std::string, JSObjectRef>::const_iterator
+		 i = this->m_outputs.begin(),
+		 e = this->m_outputs.end();
+		 i != e; ++i)
+	{
+		names.push_back(i->first.c_str());
+	}
+	
+	return names;
+	
+}
+std::vector<std::pair<BB::Patch*,const char*> > BB::Patch::inputConnections() const
+{
+	std::map<std::string, std::pair<BB::Patch*, std::string> >::const_iterator match;
+	std::vector<std::pair<BB::Patch*,const char *> > connections;
+
+	for (std::map<std::string, JSValueRef>::const_iterator
+		 i = this->m_inputs.begin(),
+		 e = this->m_inputs.end();
+		 i != e; ++i)
+	{
+		match = this->m_input_connections.find(i->first);
+		if (match != this->m_input_connections.end())
+		{
+			connections.push_back(std::make_pair(match->second.first, match->second.second.c_str()));
+		}
+		else
+		{
+			connections.push_back(std::make_pair((BB::Patch*)NULL, (const char*)NULL));
+		}
+	}
+
+	return connections;
+}
+
 #pragma mark -
 #pragma mark Static Properties
 #pragma mark -
@@ -1094,3 +1147,75 @@ double bbPatchGetOutputAsNumber(bb_patch ptch, const char * name)
 	return NULL;
 }
 
+#pragma mark Copy Connection Information
+
+void bbPatchCopyInputs(bb_patch ptch, const char * name_ptr[], size_t * size_ptr)
+{
+	BB::Patch* patch;
+	
+	try
+	{
+		patch  = reinterpret_cast<BB::Patch*>(ptch);
+		if (size_ptr != NULL)
+			size_ptr[0] = patch->inputCount();
+		if (name_ptr != NULL)
+		{
+			std::vector<const char*> inputs = patch->inputs();
+			memcpy(&name_ptr[0], &inputs[0], sizeof(const char *) * inputs.size());
+		}
+	}
+	catch (BB::Exception& error)
+	{
+		std::cerr << error.what() << std::endl;
+	}
+}
+
+void bbPatchCopyOutputs(bb_patch ptch, const char * name_ptr[], size_t * size_ptr)
+{
+	BB::Patch* patch;
+	
+	try
+	{
+		patch  = reinterpret_cast<BB::Patch*>(ptch);
+		if (size_ptr != NULL)
+			size_ptr[0] = patch->outputCount();
+		if (name_ptr != NULL)
+		{
+			std::vector<const char*> outputs = patch->outputs();
+			memcpy(&name_ptr[0], &outputs[0], sizeof(const char *) * outputs.size());
+		}
+	}
+	catch (BB::Exception& error)
+	{
+		std::cerr << error.what() << std::endl;
+	}
+}
+
+void bbPatchCopyConnections(bb_patch ptch, bb_patch * from_ptr, const char * name_ptr[])
+{
+	BB::Patch* patch;
+	
+	try
+	{
+		patch  = reinterpret_cast<BB::Patch*>(ptch);
+		if (name_ptr != NULL)
+		{
+			std::vector<std::pair<BB::Patch*,const char*> > connections = patch->inputConnections();
+
+			if (from_ptr != NULL)
+			{
+				for (size_t i = 0; i<connections.size(); ++i)
+					from_ptr[i] = reinterpret_cast<bb_patch>(connections[i].first);
+			}
+			if (name_ptr != NULL)
+			{
+				for (size_t i = 0; i<connections.size(); ++i)
+					name_ptr[i] = connections[i].second;
+			}			
+		}
+	}
+	catch (BB::Exception& error)
+	{
+		std::cerr << error.what() << std::endl;
+	}
+}

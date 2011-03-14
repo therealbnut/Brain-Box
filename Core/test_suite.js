@@ -66,5 +66,14 @@ patchCollection.saveToFile("test2.xml");
 var patchCollection2 = new PatchCollection("test1.xml");
 patchCollection2.saveToFile("test3.xml");
 
+var iSetA = new IndexSet(100);
+var iSetB = new IndexSet(75, 125);
+var iSetC = new IndexSet();
+var iSetD = new IndexSet();
+
+iSetC.intersect(iSetA, iSetB);
+iSetC.filter(function (id){return ((id%2)==0)}, null, iSetD);
+iSetD.forAll(function (id){Print(id);}, null);
+
 tests_complete();
 

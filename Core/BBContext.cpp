@@ -1,6 +1,9 @@
 #include "BBContext.h"
+
 #include "BBPatchCollection.h"
 #include "BBPatch.h"
+#include "BBIndexSet.h"
+
 #include "BBCore.h"
 
 #include <stdexcept>
@@ -11,7 +14,8 @@
 BB::Context::Context()
  :	m_class_context(NULL),
 	m_class_patch(NULL),
-	m_class_patch_collection(NULL)
+	m_class_patch_collection(NULL),
+	m_class_index_set(NULL)
 {
 	JSObjectRef object;
 	
@@ -23,6 +27,7 @@ BB::Context::Context()
 
 	this->patchClass();
 	this->patchCollectionClass();
+	this->indexSetClass();
 }
 
 BB::Context::~Context()
@@ -33,6 +38,8 @@ BB::Context::~Context()
 		JSClassRelease(this->m_class_patch);
 	if (this->m_class_patch_collection != NULL)
 		JSClassRelease(this->m_class_patch_collection);
+	if (this->m_class_index_set != NULL)
+		JSClassRelease(this->m_class_index_set);
 
 	JSGlobalContextRelease(this->m_context);
 }
@@ -80,6 +87,10 @@ std::string BB::Context::getString(JSValueRef value) const throw(BB::Exception)
 	return &buffer[0];
 }
 
+#pragma mark -
+#pragma mark JS Class Definitions
+#pragma mark -
+
 JSClassRef BB::Context::patchClass()
 {
 	if (this->m_class_patch == NULL)
@@ -89,7 +100,7 @@ JSClassRef BB::Context::patchClass()
 
 		this->m_class_patch = JSClassCreate(&BB::Patch::Definition);
 		
-		constructor_string = JSStringCreateWithUTF8CString("Patch");
+		constructor_string = JSStringCreateWithUTF8CString(BB::Patch::Definition.className);
 		constructor = JSObjectMakeConstructor(this->m_context, NULL,
 											  BB::Patch::Constructor);
 		global  = JSContextGetGlobalObject(this->m_context);
@@ -113,7 +124,7 @@ JSClassRef BB::Context::patchCollectionClass()
 		
 		this->m_class_patch_collection = JSClassCreate(&BB::PatchCollection::Definition);
 		
-		constructor_string = JSStringCreateWithUTF8CString("PatchCollection");
+		constructor_string = JSStringCreateWithUTF8CString(BB::PatchCollection::Definition.className);
 		constructor = JSObjectMakeConstructor(this->m_context, NULL,
 											  BB::PatchCollection::Constructor);
 		global  = JSContextGetGlobalObject(this->m_context);
@@ -126,6 +137,30 @@ JSClassRef BB::Context::patchCollectionClass()
 		JSStringRelease(constructor_string);		
 	}
 	return this->m_class_patch_collection;
+}
+
+JSClassRef BB::Context::indexSetClass()
+{
+	if (this->m_class_index_set == NULL)
+	{
+		JSObjectRef constructor, global;
+		JSStringRef constructor_string;
+		
+		this->m_class_index_set = JSClassCreate(&BB::IndexSet::Definition);
+		
+		constructor_string = JSStringCreateWithUTF8CString(BB::IndexSet::Definition.className);
+		constructor = JSObjectMakeConstructor(this->m_context, NULL,
+											  BB::IndexSet::Constructor);
+		global  = JSContextGetGlobalObject(this->m_context);
+		JSObjectSetProperty(this->m_context, global,
+							constructor_string, constructor,
+							kJSPropertyAttributeReadOnly |
+							kJSPropertyAttributeDontEnum |
+							kJSPropertyAttributeDontDelete,
+							NULL);
+		JSStringRelease(constructor_string);		
+	}
+	return this->m_class_index_set;
 }
 
 #pragma mark -

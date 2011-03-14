@@ -18,6 +18,7 @@ namespace BB
 
 		JSClassRef patchClass();
 		JSClassRef patchCollectionClass();
+		JSClassRef indexSetClass();
 
 		JSValueRef evaluateScript(const std::string& string) const throw(BB::Exception);
 		JSValueRef evaluateScriptFromFile(const std::string& filename) const throw(BB::Exception);
@@ -30,7 +31,7 @@ namespace BB
 		
 		void throwException(JSValueRef except) const throw(BB::Exception);
 		void throwException(const std::string& description) const throw(BB::Exception);
-		
+
 		JSObjectRef createFunction(const std::string& source) throw(BB::Exception);
 
 		static BB::Context* FromJS(JSContextRef ctx);
@@ -57,6 +58,7 @@ namespace BB
 		JSClassRef m_class_context;
 		JSClassRef m_class_patch_collection;
 		JSClassRef m_class_patch;
+		JSClassRef m_class_index_set;
 		JSGlobalContextRef m_context;
 	};
 }

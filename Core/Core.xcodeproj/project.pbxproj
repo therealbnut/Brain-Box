@@ -21,6 +21,7 @@
 		493AFF0B131646B500ECDD14 /* test_suite.js in Copy Resources */ = {isa = PBXBuildFile; fileRef = 493AFA3D13149E3000ECDD14 /* test_suite.js */; };
 		493AFF1B131646EA00ECDD14 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.c */; };
 		493AFFF113164C7F00ECDD14 /* BBCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493AFED51316450B00ECDD14 /* BBCore.framework */; };
+		4995F706131CEB7A00B23EB8 /* BBIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E41E1D131CDA7900E1FDAE /* BBIndexSet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,8 @@
 		493AFED51316450B00ECDD14 /* BBCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BBCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		493AFED61316450B00ECDD14 /* BBCore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BBCore-Info.plist"; sourceTree = "<group>"; };
 		493AFF051316466A00ECDD14 /* Test Core */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Test Core"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49E41E1C131CDA7900E1FDAE /* BBIndexSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBIndexSet.h; sourceTree = "<group>"; };
+		49E41E1D131CDA7900E1FDAE /* BBIndexSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BBIndexSet.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,8 @@
 				493AE8FF1311CB2700ECDD14 /* BBPatch.cpp */,
 				493AFC2C1315012800ECDD14 /* BBPatchCollection.h */,
 				493AFC2D1315012800ECDD14 /* BBPatchCollection.cpp */,
+				49E41E1C131CDA7900E1FDAE /* BBIndexSet.h */,
+				49E41E1D131CDA7900E1FDAE /* BBIndexSet.cpp */,
 				08FB7796FE84155DC02AAC07 /* main.c */,
 			);
 			name = Source;
@@ -345,6 +350,7 @@
 				493AFEDC1316451800ECDD14 /* BBPatchCollection.cpp in Sources */,
 				493AFEDD1316451800ECDD14 /* BBException.cpp in Sources */,
 				493A0A411318E88600ECDD14 /* string_utility.cpp in Sources */,
+				4995F706131CEB7A00B23EB8 /* BBIndexSet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
