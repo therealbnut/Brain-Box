@@ -72,6 +72,20 @@
 		490FE2CB132DF436009E0511 /* AGRegex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490FE069132DE60D009E0511 /* AGRegex.framework */; };
 		490FE2CC132DF436009E0511 /* BBVisualProgramming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490FDFCD132DE3E1009E0511 /* BBVisualProgramming.framework */; };
 		490FE2D7132DF465009E0511 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2D4132DF45F009E0511 /* MainMenu.xib */; };
+		490FE2FB132DF5B2009E0511 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2EC132DF5B1009E0511 /* AppIcon.icns */; };
+		490FE2FC132DF5B2009E0511 /* Connection.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2EE132DF5B1009E0511 /* Connection.png */; };
+		490FE2FD132DF5B2009E0511 /* Copper.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2EF132DF5B1009E0511 /* Copper.png */; };
+		490FE2FE132DF5B2009E0511 /* CopperCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F0132DF5B1009E0511 /* CopperCorner.png */; };
+		490FE2FF132DF5B2009E0511 /* CopperCornerFocused.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F1132DF5B1009E0511 /* CopperCornerFocused.png */; };
+		490FE300132DF5B2009E0511 /* CopperTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F2132DF5B1009E0511 /* CopperTile.png */; };
+		490FE301132DF5B2009E0511 /* Divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F3132DF5B1009E0511 /* Divider.png */; };
+		490FE302132DF5B2009E0511 /* DragMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F4132DF5B1009E0511 /* DragMe.png */; };
+		490FE303132DF5B2009E0511 /* DragMeSource.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F5132DF5B1009E0511 /* DragMeSource.png */; };
+		490FE304132DF5B2009E0511 /* LightMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F6132DF5B1009E0511 /* LightMap.png */; };
+		490FE305132DF5B2009E0511 /* Mahogany.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F7132DF5B1009E0511 /* Mahogany.png */; };
+		490FE306132DF5B2009E0511 /* Paint.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F8132DF5B2009E0511 /* Paint.png */; };
+		490FE307132DF5B2009E0511 /* PlugInput.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2F9132DF5B2009E0511 /* PlugInput.png */; };
+		490FE308132DF5B2009E0511 /* PlugOutput.png in Resources */ = {isa = PBXBuildFile; fileRef = 490FE2FA132DF5B2009E0511 /* PlugOutput.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +189,20 @@
 		490FE28E132DF34F009E0511 /* VisualProgrammingTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VisualProgrammingTest-Info.plist"; sourceTree = "<group>"; };
 		490FE2A8132DF39A009E0511 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		490FE2D4132DF45F009E0511 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		490FE2EC132DF5B1009E0511 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		490FE2EE132DF5B1009E0511 /* Connection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connection.png; sourceTree = "<group>"; };
+		490FE2EF132DF5B1009E0511 /* Copper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Copper.png; sourceTree = "<group>"; };
+		490FE2F0132DF5B1009E0511 /* CopperCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CopperCorner.png; sourceTree = "<group>"; };
+		490FE2F1132DF5B1009E0511 /* CopperCornerFocused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CopperCornerFocused.png; sourceTree = "<group>"; };
+		490FE2F2132DF5B1009E0511 /* CopperTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CopperTile.png; sourceTree = "<group>"; };
+		490FE2F3132DF5B1009E0511 /* Divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Divider.png; sourceTree = "<group>"; };
+		490FE2F4132DF5B1009E0511 /* DragMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DragMe.png; sourceTree = "<group>"; };
+		490FE2F5132DF5B1009E0511 /* DragMeSource.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DragMeSource.png; sourceTree = "<group>"; };
+		490FE2F6132DF5B1009E0511 /* LightMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightMap.png; sourceTree = "<group>"; };
+		490FE2F7132DF5B1009E0511 /* Mahogany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mahogany.png; sourceTree = "<group>"; };
+		490FE2F8132DF5B2009E0511 /* Paint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paint.png; sourceTree = "<group>"; };
+		490FE2F9132DF5B2009E0511 /* PlugInput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlugInput.png; sourceTree = "<group>"; };
+		490FE2FA132DF5B2009E0511 /* PlugOutput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlugOutput.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +254,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				490FE2ED132DF5B1009E0511 /* images */,
+				490FE2EC132DF5B1009E0511 /* AppIcon.icns */,
 				490FE05D132DE57C009E0511 /* BBVisualProgramming-Info.plist */,
 			);
 			name = Resources;
@@ -368,6 +398,26 @@
 			name = Test;
 			sourceTree = "<group>";
 		};
+		490FE2ED132DF5B1009E0511 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				490FE2EE132DF5B1009E0511 /* Connection.png */,
+				490FE2EF132DF5B1009E0511 /* Copper.png */,
+				490FE2F0132DF5B1009E0511 /* CopperCorner.png */,
+				490FE2F1132DF5B1009E0511 /* CopperCornerFocused.png */,
+				490FE2F2132DF5B1009E0511 /* CopperTile.png */,
+				490FE2F3132DF5B1009E0511 /* Divider.png */,
+				490FE2F4132DF5B1009E0511 /* DragMe.png */,
+				490FE2F5132DF5B1009E0511 /* DragMeSource.png */,
+				490FE2F6132DF5B1009E0511 /* LightMap.png */,
+				490FE2F7132DF5B1009E0511 /* Mahogany.png */,
+				490FE2F8132DF5B2009E0511 /* Paint.png */,
+				490FE2F9132DF5B2009E0511 /* PlugInput.png */,
+				490FE2FA132DF5B2009E0511 /* PlugOutput.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -477,6 +527,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				490FE2FB132DF5B2009E0511 /* AppIcon.icns in Resources */,
+				490FE2FC132DF5B2009E0511 /* Connection.png in Resources */,
+				490FE2FD132DF5B2009E0511 /* Copper.png in Resources */,
+				490FE2FE132DF5B2009E0511 /* CopperCorner.png in Resources */,
+				490FE2FF132DF5B2009E0511 /* CopperCornerFocused.png in Resources */,
+				490FE300132DF5B2009E0511 /* CopperTile.png in Resources */,
+				490FE301132DF5B2009E0511 /* Divider.png in Resources */,
+				490FE302132DF5B2009E0511 /* DragMe.png in Resources */,
+				490FE303132DF5B2009E0511 /* DragMeSource.png in Resources */,
+				490FE304132DF5B2009E0511 /* LightMap.png in Resources */,
+				490FE305132DF5B2009E0511 /* Mahogany.png in Resources */,
+				490FE306132DF5B2009E0511 /* Paint.png in Resources */,
+				490FE307132DF5B2009E0511 /* PlugInput.png in Resources */,
+				490FE308132DF5B2009E0511 /* PlugOutput.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

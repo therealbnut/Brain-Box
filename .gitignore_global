@@ -20,6 +20,10 @@
 *.tar
 *.zip
 
+# Frameworks and Bundles #
+##########################
+*.framework
+
 # Logs and databases #
 ######################
 *.log
