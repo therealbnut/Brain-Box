@@ -29,70 +29,124 @@ void MakeFSSpecFromPath(const char* path, FSSpec* spec)
 	}
 }
 
-GLuint LoadTexture(const char * file)
+GLuint LoadTexture(const char * filename)
 {
-	GLuint	 texID;
-	FSSpec	 spec;
-	GraphicsImportComponent	gi;
-	GWorldPtr	 gw;
-	Rect	 natbounds;
-	void	 *buffer;
+	CFStringRef path = CFStringCreateWithCString(NULL, filename, kCFStringEncodingUTF8);
+    CFURLRef texture_url = CFURLCreateWithFileSystemPath(NULL, path, kCFURLPOSIXPathStyle, false);
 	
-	MakeFSSpecFromPath(file, &spec);
-	GetGraphicsImporterForFile(&spec,&gi);
-	GraphicsImportGetNaturalBounds(gi, &natbounds);
-	
-	if(natbounds.left != 0)
+	if (!texture_url)
 	{
-		NSLog(@"Natural bounds' left is not zero.");
+		if (path) CFRelease(path);
 		return 0;
 	}
 	
-	if(natbounds.top != 0)
-	{
-		NSLog(@"Natural bounds' top is not zero.");
-		return 0;
-	}
+    CGImageSourceRef image_source = CGImageSourceCreateWithURL(texture_url, NULL);
+    CGImageRef image = CGImageSourceCreateImageAtIndex(image_source,
+													   0,
+													   NULL);
+    
+    unsigned width = CGImageGetWidth(image);
+    unsigned height = CGImageGetHeight(image);
+    
+    void *data = malloc(width * height * 4);
+    
+    CGColorSpaceRef color_space = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(data, width, height, 8,
+												 width * 4, color_space,
+												 kCGImageAlphaPremultipliedLast);
+    CGContextDrawImage(context,
+					   CGRectMake(0, 0, width, height),
+					   image);
+    
+    GLuint texture_id;
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+				 width, height, 0,
+				 GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV,
+				 data);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE_SGIS);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE_SGIS);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    
+    CFRelease(context);
+    CFRelease(color_space);
+    CFRelease(image);
+    CFRelease(image_source);
+    CFRelease(texture_url);
+	CFRelease(path);
 	
-	buffer = malloc(4 * natbounds.bottom * natbounds.right);
-	if(buffer == NULL)
-	{
-		NSLog(@"Can't allocate texture buffer.");
-		return 0;
-	}
-	
-	QTNewGWorldFromPtr(&gw, k32ARGBPixelFormat, &natbounds, NULL, NULL, 0, buffer, 4 * natbounds.right);
-	GraphicsImportSetGWorld(gi, gw, NULL);
-	GraphicsImportDraw(gi);
-	CloseComponent(gi);
-
-	
-	glGenTextures(1,&texID);
-	
-	glBindTexture(GL_TEXTURE_2D,texID);
-	
-	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
-	
-	float largest_supported_anisotropy;
-	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest_supported_anisotropy);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest_supported_anisotropy);
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
-				 natbounds.right, natbounds.bottom, 0,
-				 GL_BGRA_EXT, GL_UNSIGNED_INT_8_8_8_8, buffer);
-	
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 4, natbounds.right, natbounds.bottom, 
-					  GL_BGRA_EXT, GL_UNSIGNED_INT_8_8_8_8, buffer);
-	
-	free(buffer);
-	
-	return texID;
+	free(data);
+    
+    return texture_id;
 }
+
+//GLuint LoadTexture(const char * file)
+//{
+//	GLuint	 texID;
+//	FSSpec	 spec;
+//	GraphicsImportComponent	gi;
+//	GWorldPtr	 gw;
+//	Rect	 natbounds;
+//	void	 *buffer;
+//	
+//	MakeFSSpecFromPath(file, &spec);
+//	GetGraphicsImporterForFile(&spec,&gi);
+//	GraphicsImportGetNaturalBounds(gi, &natbounds);
+//	
+//	if(natbounds.left != 0)
+//	{
+//		NSLog(@"Natural bounds' left is not zero.");
+//		return 0;
+//	}
+//	
+//	if(natbounds.top != 0)
+//	{
+//		NSLog(@"Natural bounds' top is not zero.");
+//		return 0;
+//	}
+//	
+//	buffer = malloc(4 * natbounds.bottom * natbounds.right);
+//	if(buffer == NULL)
+//	{
+//		NSLog(@"Can't allocate texture buffer.");
+//		return 0;
+//	}
+//	
+//	QTNewGWorldFromPtr(&gw, k32ARGBPixelFormat, &natbounds, NULL, NULL, 0, buffer, 4 * natbounds.right);
+//	GraphicsImportSetGWorld(gi, gw, NULL);
+//	GraphicsImportDraw(gi);
+//	CloseComponent(gi);
+//
+//	
+//	glGenTextures(1,&texID);
+//	
+//	glBindTexture(GL_TEXTURE_2D,texID);
+//	
+//	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+//	
+//	float largest_supported_anisotropy;
+//	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest_supported_anisotropy);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest_supported_anisotropy);
+//	
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//	
+//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
+//				 natbounds.right, natbounds.bottom, 0,
+//				 GL_BGRA_EXT, GL_UNSIGNED_INT_8_8_8_8, buffer);
+//	
+//	gluBuild2DMipmaps(GL_TEXTURE_2D, 4, natbounds.right, natbounds.bottom, 
+//					  GL_BGRA_EXT, GL_UNSIGNED_INT_8_8_8_8, buffer);
+//	
+//	free(buffer);
+//	
+//	return texID;
+//}
 
 GLint LoadShader(const char * path, GLenum type)
 {

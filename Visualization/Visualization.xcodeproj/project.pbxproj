@@ -15,7 +15,6 @@
 		490FDF38132DDA8D009E0511 /* texRepeat.vert in Resources */ = {isa = PBXBuildFile; fileRef = 494E724E1323803C000236C9 /* texRepeat.vert */; };
 		490FDF39132DDA8D009E0511 /* texRepeat.frag in Resources */ = {isa = PBXBuildFile; fileRef = 494E724D1323803C000236C9 /* texRepeat.frag */; };
 		490FDF3A132DDA8D009E0511 /* LightMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 494E75701324A4C6000236C9 /* LightMap.png */; };
-		494E710113233E1E000236C9 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494E710013233E1E000236C9 /* QuickTime.framework */; };
 		494E79221324C192000236C9 /* BBWorldView.h in Headers */ = {isa = PBXBuildFile; fileRef = 499503C51321DF9C00B23EB8 /* BBWorldView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		494E79231324C1A1000236C9 /* BBWorldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 499503C61321DF9C00B23EB8 /* BBWorldView.m */; };
 		494E79241324C1A1000236C9 /* GLUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 494E70E813233D7A000236C9 /* GLUtility.m */; };
@@ -23,7 +22,6 @@
 		494E792A1324C1C3000236C9 /* BBVisualization.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 499503911321D5BC00B23EB8 /* BBVisualization.framework */; };
 		494E79421324C1DC000236C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		494E79431324C1DC000236C9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499503A21321DEE300B23EB8 /* OpenGL.framework */; };
-		494E79441324C1DC000236C9 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494E710013233E1E000236C9 /* QuickTime.framework */; };
 		494E7D1813297761000236C9 /* BBVisualization.h in Headers */ = {isa = PBXBuildFile; fileRef = 494E7D1513297756000236C9 /* BBVisualization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		494E7D5C13297BAF000236C9 /* BBVector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 494E7D191329779B000236C9 /* BBVector3.cpp */; };
 		499503A31321DEE300B23EB8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499503A21321DEE300B23EB8 /* OpenGL.framework */; };
@@ -69,7 +67,6 @@
 		490FDDFA132DCD8B009E0511 /* BBVectorArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BBVectorArray.cpp; sourceTree = "<group>"; };
 		494E70E713233D7A000236C9 /* GLUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLUtility.h; sourceTree = "<group>"; };
 		494E70E813233D7A000236C9 /* GLUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLUtility.m; sourceTree = "<group>"; };
-		494E710013233E1E000236C9 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
 		494E713413233E85000236C9 /* Occlusion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Occlusion.png; sourceTree = "<group>"; };
 		494E71F1132343BA000236C9 /* Normals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Normals.png; sourceTree = "<group>"; };
 		494E724D1323803C000236C9 /* texRepeat.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texRepeat.frag; sourceTree = "<group>"; };
@@ -94,7 +91,6 @@
 			files = (
 				494E79421324C1DC000236C9 /* Cocoa.framework in Frameworks */,
 				494E79431324C1DC000236C9 /* OpenGL.framework in Frameworks */,
-				494E79441324C1DC000236C9 /* QuickTime.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +101,6 @@
 				494E79261324C1AC000236C9 /* BBVisualization.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				499503A31321DEE300B23EB8 /* OpenGL.framework in Frameworks */,
-				494E710113233E1E000236C9 /* QuickTime.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +119,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				494E710013233E1E000236C9 /* QuickTime.framework */,
 				499503A21321DEE300B23EB8 /* OpenGL.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);

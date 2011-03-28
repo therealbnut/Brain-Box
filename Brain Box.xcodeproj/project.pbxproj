@@ -1,0 +1,525 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49C43C981331AC4C001C7735 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 49C43AB21331A1D3001C7735 /* AppIcon.icns */; };
+		49C43C991331AC4C001C7735 /* DocumentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 49C43AB31331A1D3001C7735 /* DocumentIcon.icns */; };
+		49C43C9A1331AC5D001C7735 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C43B091331A2D1001C7735 /* main.m */; };
+		49C43C9B1331AC68001C7735 /* BBVisualProgramming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C43AED1331A26D001C7735 /* BBVisualProgramming.framework */; };
+		49C43C9C1331AC68001C7735 /* BBVisualization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C43ADD1331A238001C7735 /* BBVisualization.framework */; };
+		49C43C9D1331AC68001C7735 /* BBCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C43AAE1331A1B7001C7735 /* BBCore.framework */; };
+		49C43CA71331AC99001C7735 /* BBVisualProgramming.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 49C43AED1331A26D001C7735 /* BBVisualProgramming.framework */; };
+		49C43CA81331AC99001C7735 /* BBVisualization.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 49C43ADD1331A238001C7735 /* BBVisualization.framework */; };
+		49C43CA91331AC99001C7735 /* BBCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 49C43AAE1331A1B7001C7735 /* BBCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		49C43AAD1331A1B7001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AA21331A1B7001C7735 /* Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 493AFED51316450B00ECDD14;
+			remoteInfo = BBCore;
+		};
+		49C43AAF1331A1B7001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AA21331A1B7001C7735 /* Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 493AFF051316466A00ECDD14;
+			remoteInfo = "Test Core";
+		};
+		49C43ADC1331A238001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AD41331A238001C7735 /* Visualization.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 499503911321D5BC00B23EB8;
+			remoteInfo = BBVisualization;
+		};
+		49C43ADE1331A238001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AD41331A238001C7735 /* Visualization.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = "Visualization Test";
+		};
+		49C43AEC1331A26D001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AE41331A26D001C7735 /* VisualProgramming.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 490FDFCD132DE3E1009E0511;
+			remoteInfo = BBVisualProgramming;
+		};
+		49C43AEE1331A26D001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AE41331A26D001C7735 /* VisualProgramming.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 490FE28C132DF34F009E0511;
+			remoteInfo = VisualProgrammingTest;
+		};
+		49C43C921331AC44001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AD41331A238001C7735 /* Visualization.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 499503901321D5BC00B23EB8;
+			remoteInfo = BBVisualization;
+		};
+		49C43C941331AC44001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AE41331A26D001C7735 /* VisualProgramming.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 490FDFCC132DE3E1009E0511;
+			remoteInfo = BBVisualProgramming;
+		};
+		49C43C961331AC44001C7735 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49C43AA21331A1B7001C7735 /* Core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 493AFED41316450B00ECDD14;
+			remoteInfo = BBCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		49C43CB41331ACB7001C7735 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				49C43CA71331AC99001C7735 /* BBVisualProgramming.framework in Copy Frameworks */,
+				49C43CA81331AC99001C7735 /* BBVisualization.framework in Copy Frameworks */,
+				49C43CA91331AC99001C7735 /* BBCore.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		49C43AA21331A1B7001C7735 /* Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Core.xcodeproj; path = Core/Core.xcodeproj; sourceTree = "<group>"; };
+		49C43AB21331A1D3001C7735 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		49C43AB31331A1D3001C7735 /* DocumentIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DocumentIcon.icns; sourceTree = "<group>"; };
+		49C43AB51331A1D3001C7735 /* Connection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connection.png; sourceTree = "<group>"; };
+		49C43AB61331A1D3001C7735 /* Copper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Copper.png; sourceTree = "<group>"; };
+		49C43AB71331A1D3001C7735 /* CopperCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CopperCorner.png; sourceTree = "<group>"; };
+		49C43AB81331A1D3001C7735 /* CopperCornerFocused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CopperCornerFocused.png; sourceTree = "<group>"; };
+		49C43AB91331A1D3001C7735 /* CopperTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CopperTile.png; sourceTree = "<group>"; };
+		49C43ABA1331A1D3001C7735 /* Divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Divider.png; sourceTree = "<group>"; };
+		49C43ABB1331A1D3001C7735 /* DragMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DragMe.png; sourceTree = "<group>"; };
+		49C43ABC1331A1D3001C7735 /* DragMeSource.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DragMeSource.png; sourceTree = "<group>"; };
+		49C43ABD1331A1D3001C7735 /* LightMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightMap.png; sourceTree = "<group>"; };
+		49C43ABE1331A1D3001C7735 /* Mahogany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mahogany.png; sourceTree = "<group>"; };
+		49C43ABF1331A1D3001C7735 /* Paint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paint.png; sourceTree = "<group>"; };
+		49C43AC01331A1D3001C7735 /* PlugInput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlugInput.png; sourceTree = "<group>"; };
+		49C43AC11331A1D3001C7735 /* PlugOutput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlugOutput.png; sourceTree = "<group>"; };
+		49C43AD41331A238001C7735 /* Visualization.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Visualization.xcodeproj; path = Visualization/Visualization.xcodeproj; sourceTree = "<group>"; };
+		49C43AE41331A26D001C7735 /* VisualProgramming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VisualProgramming.xcodeproj; path = VisualProgramming/VisualProgramming.xcodeproj; sourceTree = "<group>"; };
+		49C43B091331A2D1001C7735 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49C43B0B1331A300001C7735 /* BrainBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainBox_Prefix.pch; sourceTree = "<group>"; };
+		49C43C8C1331AC2D001C7735 /* Brain Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brain Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C43C8E1331AC2D001C7735 /* Brain Box-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Brain Box-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49C43C8A1331AC2D001C7735 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49C43C9B1331AC68001C7735 /* BBVisualProgramming.framework in Frameworks */,
+				49C43C9C1331AC68001C7735 /* BBVisualization.framework in Frameworks */,
+				49C43C9D1331AC68001C7735 /* BBCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49C43C8C1331AC2D001C7735 /* Brain Box.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Brain Box */ = {
+			isa = PBXGroup;
+			children = (
+				49C43AF01331A273001C7735 /* BB Frameworks */,
+				49C43B021331A2B2001C7735 /* Classes */,
+				49C43B071331A2C5001C7735 /* Other Sources */,
+				49C43AB11331A1D3001C7735 /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				49C43C8E1331AC2D001C7735 /* Brain Box-Info.plist */,
+			);
+			name = "Brain Box";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49C43AA31331A1B7001C7735 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49C43AAE1331A1B7001C7735 /* BBCore.framework */,
+				49C43AB01331A1B7001C7735 /* Test Core */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49C43AB11331A1D3001C7735 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				49C43AB21331A1D3001C7735 /* AppIcon.icns */,
+				49C43AB31331A1D3001C7735 /* DocumentIcon.icns */,
+				49C43AB41331A1D3001C7735 /* images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		49C43AB41331A1D3001C7735 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				49C43AB51331A1D3001C7735 /* Connection.png */,
+				49C43AB61331A1D3001C7735 /* Copper.png */,
+				49C43AB71331A1D3001C7735 /* CopperCorner.png */,
+				49C43AB81331A1D3001C7735 /* CopperCornerFocused.png */,
+				49C43AB91331A1D3001C7735 /* CopperTile.png */,
+				49C43ABA1331A1D3001C7735 /* Divider.png */,
+				49C43ABB1331A1D3001C7735 /* DragMe.png */,
+				49C43ABC1331A1D3001C7735 /* DragMeSource.png */,
+				49C43ABD1331A1D3001C7735 /* LightMap.png */,
+				49C43ABE1331A1D3001C7735 /* Mahogany.png */,
+				49C43ABF1331A1D3001C7735 /* Paint.png */,
+				49C43AC01331A1D3001C7735 /* PlugInput.png */,
+				49C43AC11331A1D3001C7735 /* PlugOutput.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		49C43AD51331A238001C7735 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49C43ADD1331A238001C7735 /* BBVisualization.framework */,
+				49C43ADF1331A238001C7735 /* Visualization Test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49C43AE51331A26D001C7735 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49C43AED1331A26D001C7735 /* BBVisualProgramming.framework */,
+				49C43AEF1331A26D001C7735 /* VisualProgrammingTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49C43AF01331A273001C7735 /* BB Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49C43AA21331A1B7001C7735 /* Core.xcodeproj */,
+				49C43AD41331A238001C7735 /* Visualization.xcodeproj */,
+				49C43AE41331A26D001C7735 /* VisualProgramming.xcodeproj */,
+			);
+			name = "BB Frameworks";
+			sourceTree = "<group>";
+		};
+		49C43B021331A2B2001C7735 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		49C43B071331A2C5001C7735 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				49C43B0B1331A300001C7735 /* BrainBox_Prefix.pch */,
+				49C43B091331A2D1001C7735 /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49C43C8B1331AC2D001C7735 /* Brain Box */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49C43C911331AC2D001C7735 /* Build configuration list for PBXNativeTarget "Brain Box" */;
+			buildPhases = (
+				49C43C881331AC2D001C7735 /* Resources */,
+				49C43C891331AC2D001C7735 /* Sources */,
+				49C43C8A1331AC2D001C7735 /* Frameworks */,
+				49C43CB41331ACB7001C7735 /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49C43C931331AC44001C7735 /* PBXTargetDependency */,
+				49C43C951331AC44001C7735 /* PBXTargetDependency */,
+				49C43C971331AC44001C7735 /* PBXTargetDependency */,
+			);
+			name = "Brain Box";
+			productName = "Brain Box";
+			productReference = 49C43C8C1331AC2D001C7735 /* Brain Box.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Brain Box" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Brain Box */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 49C43AA31331A1B7001C7735 /* Products */;
+					ProjectRef = 49C43AA21331A1B7001C7735 /* Core.xcodeproj */;
+				},
+				{
+					ProductGroup = 49C43AD51331A238001C7735 /* Products */;
+					ProjectRef = 49C43AD41331A238001C7735 /* Visualization.xcodeproj */;
+				},
+				{
+					ProductGroup = 49C43AE51331A26D001C7735 /* Products */;
+					ProjectRef = 49C43AE41331A26D001C7735 /* VisualProgramming.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				49C43C8B1331AC2D001C7735 /* Brain Box */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		49C43AAE1331A1B7001C7735 /* BBCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BBCore.framework;
+			remoteRef = 49C43AAD1331A1B7001C7735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49C43AB01331A1B7001C7735 /* Test Core */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "Test Core";
+			remoteRef = 49C43AAF1331A1B7001C7735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49C43ADD1331A238001C7735 /* BBVisualization.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BBVisualization.framework;
+			remoteRef = 49C43ADC1331A238001C7735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49C43ADF1331A238001C7735 /* Visualization Test.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Visualization Test.app";
+			remoteRef = 49C43ADE1331A238001C7735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49C43AED1331A26D001C7735 /* BBVisualProgramming.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BBVisualProgramming.framework;
+			remoteRef = 49C43AEC1331A26D001C7735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49C43AEF1331A26D001C7735 /* VisualProgrammingTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = VisualProgrammingTest.app;
+			remoteRef = 49C43AEE1331A26D001C7735 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49C43C881331AC2D001C7735 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49C43C981331AC4C001C7735 /* AppIcon.icns in Resources */,
+				49C43C991331AC4C001C7735 /* DocumentIcon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49C43C891331AC2D001C7735 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49C43C9A1331AC5D001C7735 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		49C43C931331AC44001C7735 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BBVisualization;
+			targetProxy = 49C43C921331AC44001C7735 /* PBXContainerItemProxy */;
+		};
+		49C43C951331AC44001C7735 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BBVisualProgramming;
+			targetProxy = 49C43C941331AC44001C7735 /* PBXContainerItemProxy */;
+		};
+		49C43C971331AC44001C7735 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BBCore;
+			targetProxy = 49C43C961331AC44001C7735 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		49C43C8F1331AC2D001C7735 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Brain Box-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Brain Box";
+			};
+			name = Debug;
+		};
+		49C43C901331AC2D001C7735 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Brain Box-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Brain Box";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49C43C911331AC2D001C7735 /* Build configuration list for PBXNativeTarget "Brain Box" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49C43C8F1331AC2D001C7735 /* Debug */,
+				49C43C901331AC2D001C7735 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Brain Box" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

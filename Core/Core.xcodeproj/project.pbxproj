@@ -22,6 +22,7 @@
 		493AFF1B131646EA00ECDD14 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.c */; };
 		493AFFF113164C7F00ECDD14 /* BBCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493AFED51316450B00ECDD14 /* BBCore.framework */; };
 		4995F706131CEB7A00B23EB8 /* BBIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E41E1D131CDA7900E1FDAE /* BBIndexSet.cpp */; };
+		49D1AF2213413C5C00E89A04 /* JavaScriptCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 493A002A13164CE300ECDD14 /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,26 @@
 				493A003613164CF200ECDD14 /* JavaScriptCore.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49D1AF2913413C6500E89A04 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				49D1AF2213413C5C00E89A04 /* JavaScriptCore.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49D1AF2A13413C6500E89A04 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -235,6 +256,7 @@
 			buildConfigurationList = 493AFED91316450B00ECDD14 /* Build configuration list for PBXNativeTarget "BBCore" */;
 			buildPhases = (
 				493AFED01316450B00ECDD14 /* Headers */,
+				49D1AF2913413C6500E89A04 /* Copy Frameworks */,
 				493AFED11316450B00ECDD14 /* Resources */,
 				493AFED21316450B00ECDD14 /* Sources */,
 				493AFED31316450B00ECDD14 /* Frameworks */,
@@ -257,6 +279,7 @@
 				493AFF031316466A00ECDD14 /* Frameworks */,
 				493AFF201316471400ECDD14 /* Copy Resources */,
 				493AFF211316471400ECDD14 /* Copy Frameworks */,
+				49D1AF2A13413C6500E89A04 /* CopyFiles */,
 			);
 			buildRules = (
 			);

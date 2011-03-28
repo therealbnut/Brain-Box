@@ -104,7 +104,7 @@
 								   toPatch: 0 key: 0] storeOnPasteboard: dragPasteboard];
 	}
 
-#warning fix me
+#pragma TODO fix me
 	NSImage * dragImage = [BBImageResource NSImageFromName: @"Connection"];
 	NSSize dragImageSize = [dragImage size];
 	localPoint = NSMakePoint(localPoint.x-dragImageSize.width * 0.5, localPoint.y-dragImageSize.height * 0.5);
@@ -198,7 +198,7 @@
 		[(BBPatchCollectionView*)[self superview] upgradeTemporaryDraggingConnection: sender
 																		   withPatch: self->_patch
 																			   index: [self cellRowForPoint: localPoint]];
-#warning attach me!
+#pragma TODO attach me!
 
 		return NO;
 	}

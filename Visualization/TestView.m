@@ -20,14 +20,15 @@
 		[self setForwards:     &self->_forwards];
 		[self setUps:          &self->_ups];
 		
-		for (int i=0; i<8; ++i)
+		for (int i=0; i<1024; ++i)
 		{
 			BBVector3 pos = BBVector3CreateRandom();
-			pos = BBVector3Add(pos, BBVector3Make(0.0, 0.0, -4.0));
-			pos = BBVector3Mul(pos, 2.0);
+			pos = BBVector3Mul(pos, 32.0);
+			pos.coord[2] *= 0.5;
+			pos = BBVector3Add(pos, BBVector3Make(0.0, 0.0, -32.0));
 			
-			BBVector3Array_add(&self->_colors,       BBVector3Make(1.0, 0.0, 0.0));
-			BBVector3Array_add(&self->_scales,       BBVector3Make(0.4, 0.4, 0.4));
+			BBVector3Array_add(&self->_colors,       BBVector3Make(1.0, 1.0, 1.0));
+			BBVector3Array_add(&self->_scales,       BBVector3Make(1.4, 1.4, 1.4));
 			BBVector3Array_add(&self->_translations, pos);
 			BBVector3Array_add(&self->_forwards,     BBVector3Make(0.0, 0.0, 1.0));
 			BBVector3Array_add(&self->_ups,          BBVector3Make(0.0, 1.0, 0.0));
